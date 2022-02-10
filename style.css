@@ -1,0 +1,25 @@
+*{  
+    margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    color: white;
+}
+
+form{
+    background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px);
+}
+#box-input-message{
+    background-color: rgb(97, 106, 114);
+    border: none;
+    border-radius: 30px;
+    height: 30px;
+}
+#button-messagem-env{
+    background-color: rgb(57, 169, 235);
+    width: 70px;
+    height: 35px;
+    border-radius: 30px;
+}
