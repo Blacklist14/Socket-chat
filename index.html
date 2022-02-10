@@ -9,7 +9,7 @@
 </head>
 <style>
     body {
-        background-image: url('https://i.ytimg.com/vi/SQBDcAxVL1M/maxresdefault.jpg') ;
+        background-image: url('https://i.ytimg.com/vi/SQBDcAxVL1M/maxresdefault.jpg');
         background-repeat: no-repeat;
         background-size: 100%;
         margin: 0;
@@ -36,6 +36,12 @@
         flex-grow: 1;
         border-radius: 2rem;
         margin: 0.25rem;
+    }
+
+    #input-nick {
+        border: none;
+        border-radius: 10px;
+        padding-left: 15px;
     }
 
     #input:focus {
@@ -75,7 +81,8 @@
     <ul id="messages">
     </ul>
     <form id="form" action="">
-        <input id="input" autocomplete="off" /><button>Send</button>
+        <input type="text" id="input-nick" placeholder="Seu nome"> <input id="input"
+            autocomplete="off" /><button>Send</button>
     </form>
 
     <script src="/socket.io/socket.io.js"></script>
@@ -85,19 +92,23 @@
         const message = document.getElementById('messages')
         const form = document.getElementById('form')
         const input = document.getElementById('input')
+        const inputNick = document.getElementById('input-nick')
 
-        form.addEventListener('submit',(e)=>{
+        form.addEventListener('submit', (e) => {
             e.preventDefault()
+            if (inputNick.value) {
+                inputNick.style.display = "none"
 
-            if(input.value){
-                socket.emit('chat message',input.value)
-                input.value = ''
+                if (input.value) {
+                    socket.emit('chat message', inputNick.value,input.value)
+                    input.value = ''
+                }
             }
         })
-
-        socket.on('chat message',(msg)=>{
+        socket.on('chat message', (name,msg) => {
             var item = document.createElement('li')
-            item.textContent = msg
+            
+            item.textContent = name,msg
             message.appendChild(item)
             window.scrollTo(0, document.body.scrollHeight);
         })
