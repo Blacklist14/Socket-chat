@@ -16,7 +16,7 @@ npm start
 Bom, irei adicionando conteúdo novo para ver oque isso vai se tornar.
 # Objetivos
 
-- [x]Transmitir dados simultâneos
-- [ ]Adicionar nome do usuário a mensagem
-- [ ]Adiciona status online/offline
-- [ ]Mostrar usuários online
+- [x] Transmitir dados simultâneos
+- [x] Adicionar nome do usuário a mensagem
+- [ ] Adiciona status online/offline
+- [ ] Mostrar usuários online
