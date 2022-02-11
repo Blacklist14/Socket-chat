@@ -16,13 +16,14 @@ io.on('connection', (socket) => {
 
     const users = io.engine.clientsCount
     const count = parseInt(users)
+
     io.emit('onlines', "conectados : " + count)
     socket.on("disconnect", () => {
         io.emit('onlines', "conectados : " + [count - 1])
     })
     //CAPTURA MENSAGEM E EMITE PARA OS USUARIOS
-    socket.on('chat message', (name, msg) => {
-        io.emit('chat message', name + ": " + msg)
+    socket.on('chatMessage', (name, msg) => {
+        io.emit('chatMessage', name + ": " + msg)
     })
 })
 server.listen(port, () => {

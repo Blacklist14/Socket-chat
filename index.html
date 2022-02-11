@@ -6,19 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zotuxe CHAT</title>
+    <!-- links-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,500;1,200&display=swap"
+        rel="stylesheet">
 </head>
 <style>
     body {
-        background-image: url('https://i.ytimg.com/vi/SQBDcAxVL1M/maxresdefault.jpg');
-        background-repeat: no-repeat;
-        background-size: 100%;
+        background: #41cec788;
+
         margin: 0;
+        margin-top: 10px;
         padding-bottom: 3rem;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: #253A44;
+        font-family: 'Fira Sans', sans-serif;
     }
 
     span {
-        color: white;
+        margin-left: 20px;
     }
 
     #count {
@@ -27,7 +33,7 @@
     }
 
     #form {
-        background: rgba(172, 81, 180, 0.726);
+        background: #90ced1;
         padding: 0.25rem;
         position: fixed;
         bottom: 0;
@@ -58,13 +64,12 @@
     }
 
     #form>button {
-        background: rgb(90, 1, 163);
+        background: #0AC5D4;
         border: none;
         padding: 0 1rem;
         margin: 0.25rem;
         border-radius: 3px;
         outline: none;
-        color: #fff;
     }
 
     #messages {
@@ -78,11 +83,12 @@
     }
 
     #messages>li {
-        background: #b3b0b0;
+        background: #0AC5D4;
         border-radius: 50px;
         margin-top: 15px;
         margin-left: 20px;
         width: max-content;
+        color: #fff;
     }
 </style>
 </style>
@@ -111,7 +117,7 @@
                 inputNick.style.display = "none"
 
                 if (input.value) {
-                    socket.emit('chat message', inputNick.value, input.value)
+                    socket.emit('chatMessage', inputNick.value, input.value)
                     input.value = ''
                 }
             }
@@ -120,7 +126,7 @@
             countsOn.innerText = count
         })
         console.log(countsOn.innerText)
-        socket.on('chat message', (name, msg) => {
+        socket.on('chatMessage', (name, msg) => {
             var item = document.createElement('li')
             item.textContent = name, msg
             message.appendChild(item)
