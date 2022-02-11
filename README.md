@@ -19,5 +19,5 @@ Bom, irei adicionando conteúdo novo para ver oque isso vai se tornar.
 
 - [x] Transmitir dados simultâneos
 - [x] Adicionar nome do usuário a mensagem
-- [x] Adiciona status online/offline
-- [ ] Mostrar usuários online
+- [x] Mostrar numeros de usuários online
+- [ ] Adiciona status online/offline
