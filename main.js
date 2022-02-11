@@ -8,16 +8,23 @@ const io = new Server(server)
 
 const port = 8080
 
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
 })
 
-io.on('connection',(socket)=>{
-    socket.on('chat message',(name,msg) => {
-        io.emit('chat message',name + ": " + msg)
-   })
-})
+io.on('connection', (socket) => {
 
-server.listen(port,()=>{
+    const users = io.engine.clientsCount
+    const count = parseInt(users)
+    io.emit('onlines', "conectados : " + count)
+    socket.on("disconnect", () => {
+        io.emit('onlines', "conectados : " + [count - 1])
+    })
+    //CAPTURA MENSAGEM E EMITE PARA OS USUARIOS
+    socket.on('chat message', (name, msg) => {
+        io.emit('chat message', name + ": " + msg)
+    })
+})
+server.listen(port, () => {
     console.log('servidor rodando em http://localhost:' + port)
 })
