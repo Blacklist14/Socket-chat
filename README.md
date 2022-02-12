@@ -10,7 +10,7 @@ npm i
 ``` 
  - Após instalação inicie o projeto no https://localhost:8080
 ```npm
-npm start
+npm start main.js
 ```
 
 # Sobre
