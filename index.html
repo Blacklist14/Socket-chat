@@ -13,33 +13,56 @@
         rel="stylesheet">
 </head>
 <style>
+    *{ 
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
     body {
+        display: flex;
         background: #41cec788;
-
         margin: 0;
         margin-top: 10px;
         padding-bottom: 3rem;
         color: #253A44;
         font-family: 'Fira Sans', sans-serif;
     }
-
+    section{
+        margin: 10px;
+    }
+    #users-list{
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        padding: 0px;
+        width: 300px;
+        height: 500px;
+        background-color: white;
+        list-style: none;
+        align-items: center;
+        padding-top: 15px;
+    }
+    #sec-message{
+       width: 1000px;
+       word-break: break-word;
+    }
     span {
         margin-left: 20px;
     }
 
     #count {
-
+        position: fixed;
         text-transform: uppercase;
+        top: 10px;
     }
 
     #form {
+        display: flex;
         background: #90ced1;
         padding: 0.25rem;
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        display: flex;
         height: 3rem;
         box-sizing: border-box;
         backdrop-filter: blur(10px);
@@ -83,20 +106,23 @@
     }
 
     #messages>li {
+        width: auto;
         background: #0AC5D4;
         border-radius: 50px;
         margin-top: 15px;
         margin-left: 20px;
-        width: max-content;
         color: #fff;
     }
 </style>
-</style>
 
 <body>
-    <span id="count"></span>
-    <ul id="messages">
-    </ul>
+    <section id="sec-message">
+        <ul id="messages"></ul>
+    </section>
+    <section>
+        <span id="count"></span>
+        <ul id="users-list"></ul>
+    </section>
     <form id="form" action="">
         <input type="text" id="input-nick" placeholder="Seu nome"> <input id="input"
             autocomplete="off" /><button>Send</button>
@@ -106,15 +132,23 @@
     <script>
         var socket = io()
 
+        const usersList = document.getElementById('users-list')
         const message = document.getElementById('messages')
         const form = document.getElementById('form')
         const input = document.getElementById('input')
         const inputNick = document.getElementById('input-nick')
         const countsOn = document.getElementById('count')
+
+        let permi = 0
         form.addEventListener('submit', (e) => {
             e.preventDefault()
             if (inputNick.value) {
                 inputNick.style.display = "none"
+                if (permi === 0) {
+                    socket.emit('usersOnline', inputNick.value,"","")
+                    permi = 1
+                
+                }
 
                 if (input.value) {
                     socket.emit('chatMessage', inputNick.value, input.value)
@@ -122,10 +156,21 @@
                 }
             }
         })
+        
+        socket.on('usersOnline', (name,id,statusUser) => {
+            const idSave = document.getElementById(id)
+            if(statusUser === "online"){
+                var user = document.createElement('li')
+                user.textContent = name
+                usersList.appendChild(user).id = id
+            }
+            if(statusUser === "offline"){
+                idSave.parentNode.removeChild(idSave)
+            }
+        })
         socket.on('onlines', (count) => {
             countsOn.innerText = count
         })
-        console.log(countsOn.innerText)
         socket.on('chatMessage', (name, msg) => {
             var item = document.createElement('li')
             item.textContent = name, msg
