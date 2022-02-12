@@ -14,10 +14,11 @@ npm start
 ```
 
 # Sobre
-Bom, irei adicionando conteúdo novo para ver oque isso vai se tornar.
+O projeto e um chat em tempo real.
 # Objetivos
 
 - [x] Transmitir dados simultâneos
 - [x] Adicionar nome do usuário a mensagem
 - [x] Mostrar numeros de usuários online
 - [x] Adiciona status online/offline
+- [ ] Mostrar usúario que esta digitando
